@@ -19,13 +19,13 @@ public class CharacterController {
                 .toList();
     }
 
+    @GetMapping("/{id}")
+    public CharacterDTO findById(@PathVariable String id) {
+        return new CharacterMapper().toCharacterDTO(characterService.findById(id));
+    }
 
+    // TODO: add controller methods
 
-//    @GetMapping("/{id}")
-//    public Character findById(@PathVariable String id) {
-//        return characterService.findById(id);
-//    }
-//
 //    @PostMapping
 //    public Character saveCharacter(@RequestBody Character character) {
 //        return characterService.save(character);
@@ -42,26 +42,4 @@ public class CharacterController {
 //    public void deleteById(@PathVariable String id) {
 //        characterService.deleteById(id);
 //    }
-
-
-
-    // DTO MAPPING
-//    private CharacterDTO toCharacterDTO(Character character) {
-//        return new CharacterDTO(
-//                character.id(),
-//                character.name(),
-//                character.age(),
-//                character.profession()
-//        );
-//    }
-//
-//    private CreateCharacterDTO toCreateCharacterDTO(Character character) {
-//        return new CreateCharacterDTO(
-//                character.name(),
-//                character.age(),
-//                character.profession()
-//        );
-//    }
-
-
 }

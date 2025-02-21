@@ -16,6 +16,21 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
+    public Character findById(String id) {
+        return characterRepository.findById(id)
+                .orElseThrow();
+    }
+
+
+
+
+
+
+
+
+
+    // TODO: IMPLEMENT METHODS TEST DRIVEN
+
 //    public Character findById(String id) {
 //        return characterRepository.findById(id)
 //                .orElseThrow();
