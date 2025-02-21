@@ -1,21 +1,67 @@
 package org.example.nfjavaasterixapi;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/asterix")
+@RequestMapping("asterix")
 @RequiredArgsConstructor
 public class CharacterController {
 
-    private final CharacterRepository characterRepository;
+    private final CharacterMapper characterMapper;
+    private final CharacterService characterService;
 
-    @GetMapping("/characters")
-    public List<Character> sayHello() {
-        return characterRepository.findAll();
+    @GetMapping({"character","character/"}) // provide multiple entry points
+    public List<CharacterDTO> findAll() {
+        return characterService.findAll().stream()
+                .map(characterMapper::toCharacterDTO)
+                .toList();
     }
+
+
+
+//    @GetMapping("/{id}")
+//    public Character findById(@PathVariable String id) {
+//        return characterService.findById(id);
+//    }
+//
+//    @PostMapping
+//    public Character saveCharacter(@RequestBody Character character) {
+//        return characterService.save(character);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public Character updateCharacter(@PathVariable String id, @RequestBody Character character) {
+//            return characterService.save(
+//                    characterService.findById(id).orElseThrow()
+//            );
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteById(@PathVariable String id) {
+//        characterService.deleteById(id);
+//    }
+
+
+
+    // DTO MAPPING
+//    private CharacterDTO toCharacterDTO(Character character) {
+//        return new CharacterDTO(
+//                character.id(),
+//                character.name(),
+//                character.age(),
+//                character.profession()
+//        );
+//    }
+//
+//    private CreateCharacterDTO toCreateCharacterDTO(Character character) {
+//        return new CreateCharacterDTO(
+//                character.name(),
+//                character.age(),
+//                character.profession()
+//        );
+//    }
+
+
 }
